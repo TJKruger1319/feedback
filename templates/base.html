@@ -7,6 +7,9 @@
     <title>{% block title %}{% endblock%}</title>
 </head>
 <body>
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div>{{ msg }}</div>
+    {% endfor %}
     {% block content %}{% endblock%}
 </body>
 </html>
