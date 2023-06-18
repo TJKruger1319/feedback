@@ -29,3 +29,21 @@ class User(db.Model):
 
         return cls(username=username, password=hash_utf8, email=email, first_name=first, last_name=last)
     
+    @classmethod
+    def authenticate(cls, user, pwd):
+       """Check to see if user and password pair in database"""
+       user = User.query.filter_by(username=user).first()
+
+       if user and bcrypt.check_password_hash(user.password, pwd):
+           return user
+       else:
+           return False
+       
+class Feedback(db.Model):
+
+    __tablename__ = "feedback"
+
+    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    username = db.Column(db.Text, db.ForeignKey("users.username"))

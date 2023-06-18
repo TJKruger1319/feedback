@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>{{user.username}}</h1>
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+<h1>{{user.email}}</h1>
+
+{% for fb in feedback %}
+      <p>fb.title</p>
+      <p>fb.content</p>
+      <form action="{{ '/feedback/%s/edit'%fb.id }}" method="POST"><button>Edit Feedback</button></form>
+      <form action="{{ '/feedback/%s/delete'%fb.id }}" method="POST"><button>Delete Feedback</button></form>      
+{% endfor %}
+
+<a href="{{ '/users/%s/feedback/add'%user.username }}">Add Feedback</a>
+<form action="{{'/users/%s/delete'%user.username}}" method="POST"><button>Delete User</button></form>
+{% endblock%}
