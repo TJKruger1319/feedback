@@ -8,10 +8,12 @@
 <h1>{{user.email}}</h1>
 
 {% for fb in feedback %}
-      <p>fb.title</p>
-      <p>fb.content</p>
-      <form action="{{ '/feedback/%s/edit'%fb.id }}" method="POST"><button>Edit Feedback</button></form>
+    <div>
+      <p>{{fb.title}}</p>
+      <p>{{fb.content}}</p>
+      <form action="{{ '/feedback/%s/update'%fb.id }}" method="POST"><button>Edit Feedback</button></form>
       <form action="{{ '/feedback/%s/delete'%fb.id }}" method="POST"><button>Delete Feedback</button></form>      
+    </div>
 {% endfor %}
 
 <a href="{{ '/users/%s/feedback/add'%user.username }}">Add Feedback</a>
